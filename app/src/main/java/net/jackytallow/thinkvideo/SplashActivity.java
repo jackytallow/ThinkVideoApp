@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-public class MainActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
     private static final int GO_HOME = 1;
@@ -32,13 +32,13 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void showHome() {
-        Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+        Intent intent = new Intent(SplashActivity.this,HomeActivity.class);
         startActivity(intent);
         finish();
     }
 
     private void showGuide() {
-        Intent intent = new Intent(MainActivity.this,GuideActivity.class);
+        Intent intent = new Intent(SplashActivity.this,GuideActivity.class);
         startActivity(intent);
         finish();
     }
