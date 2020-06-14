@@ -6,13 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+    <include
+        layout="@layout/top_actionbar"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="首页"
-        android:textSize="25sp"
+        android:text="this is TextView"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="30dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
