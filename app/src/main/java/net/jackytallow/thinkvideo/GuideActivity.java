@@ -145,8 +145,9 @@ public class GuideActivity extends AppCompatActivity implements ViewPager.OnPage
 
     private void setGuided() {
           SharedPreferences sp =  getSharedPreferences("config",MODE_PRIVATE);
-          sp.edit().putBoolean("mIsFirstIn",false);
-          sp.edit().commit();
+          SharedPreferences.Editor editor = sp.edit();
+          editor.putBoolean("mIsFirstIn",false);
+          editor.apply();
     }
 
 
