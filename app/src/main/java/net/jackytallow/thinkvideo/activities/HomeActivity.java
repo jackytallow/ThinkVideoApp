@@ -47,11 +47,11 @@ public class HomeActivity extends BaseActivity {
         mActionBarDrawerToggle.syncState();
         mDrawerLayout.addDrawerListener(mActionBarDrawerToggle);
 
-//        //TODO
-//        mPreItem = mNavigationView.getMenu().getItem(0);
-//        mPreItem.setChecked(true);
-//        initFragment();
-//        handleNavigationView();
+        //TODO
+        mPreItem = mNavigationView.getMenu().getItem(0);
+        mPreItem.setChecked(true);
+        initFragment();
+        handleNavigationView();
     }
 
     private void initFragment() {
@@ -69,7 +69,7 @@ public class HomeActivity extends BaseActivity {
                 }
                 switch (item.getItemId()) {
                     case R.id.navigation_item_video:
-                        switchFragment(HomeFragment.class);
+
                         mToolbar.setTitle(R.string.home_title);
                         break;
                     case R.id.navigation_item_blog:

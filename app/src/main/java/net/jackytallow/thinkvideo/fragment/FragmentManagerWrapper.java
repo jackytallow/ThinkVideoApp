@@ -13,10 +13,9 @@ import androidx.fragment.app.Fragment;
  */
 public class FragmentManagerWrapper {
 
-    private static volatile FragmentManagerWrapper mInstance = null;
+    private volatile static FragmentManagerWrapper mInstance = null;
 
-    //双重校验
-    public static FragmentManagerWrapper getInstance() {
+    public static FragmentManagerWrapper getInstance(){
         if (mInstance == null) {
             synchronized (FragmentManagerWrapper.class) {
                 if (mInstance == null) {
@@ -27,32 +26,33 @@ public class FragmentManagerWrapper {
         return mInstance;
     }
 
-    private HashMap<String, BaseFragment> mHashMap = new HashMap<>();
+    private HashMap<String, Fragment> mHashMap = new HashMap<>();
 
     public Fragment createFragment(Class<?> clazz){
         return createFragment(clazz, true);
     }
 
-    public BaseFragment createFragment(Class<?> clazz, boolean isObtain) {
-        BaseFragment resultFragment = null;
+    public Fragment createFragment(Class<?> clazz, boolean isobtain){
+        Fragment fragment = null;
         String className = clazz.getName();
         if (mHashMap.containsKey(className)) {
+            fragment = mHashMap.get(className);
+        } else {
             try {
-                resultFragment = (BaseFragment) Class.forName(className).newInstance();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                fragment = (Fragment) Class.forName(className).newInstance();
             } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-        }
 
-        if (isObtain) {
-            mHashMap.put(className, resultFragment);
         }
-
-        return resultFragment;
+        if (isobtain) {
+            mHashMap.put(className,fragment);
+        }
+        return fragment;
     }
 
 }
