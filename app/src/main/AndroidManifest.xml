@@ -10,11 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".GuideActivity"
+            android:name=".activities.GuideActivity"
             android:theme="@style/FullScreen" />
-        <activity android:name=".HomeActivity" />
+        <activity android:name=".activities.HomeActivity" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".activities.SplashActivity"
             android:theme="@style/FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

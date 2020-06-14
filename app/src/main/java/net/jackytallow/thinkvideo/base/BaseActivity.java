@@ -1,7 +1,9 @@
-package net.jackytallow.thinkvideo;
+package net.jackytallow.thinkvideo.base;
 
 import android.os.Bundle;
 import android.view.View;
+
+import net.jackytallow.thinkvideo.R;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;

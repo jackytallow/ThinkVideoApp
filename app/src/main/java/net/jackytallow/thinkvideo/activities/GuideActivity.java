@@ -1,4 +1,4 @@
-package net.jackytallow.thinkvideo;
+package net.jackytallow.thinkvideo.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import net.jackytallow.thinkvideo.R;
 
 import java.util.ArrayList;
 import java.util.List;

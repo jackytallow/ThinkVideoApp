@@ -1,4 +1,4 @@
-package net.jackytallow.thinkvideo;
+package net.jackytallow.thinkvideo.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +8,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+
+import net.jackytallow.thinkvideo.R;
+import net.jackytallow.thinkvideo.activities.GuideActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -38,7 +41,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void showGuide() {
-        Intent intent = new Intent(SplashActivity.this,GuideActivity.class);
+        Intent intent = new Intent(SplashActivity.this, GuideActivity.class);
         startActivity(intent);
         finish();
     }
