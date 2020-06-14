@@ -15,7 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 public abstract class BaseActivity extends AppCompatActivity {
 
 
-    private Toolbar mToolbar;
+    protected Toolbar mToolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

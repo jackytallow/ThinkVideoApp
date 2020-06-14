@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">thinkVideo</string>
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+
+    <string name="home_title">首页</string>
+    <string name="blog_title">我的博客</string>
+    <string name="about_title">关于软件</string>
+    
 </resources>

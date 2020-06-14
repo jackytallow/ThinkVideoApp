@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".home.HomeActivity">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/navigation_item_video"
+            android:icon="@mipmap/iconfont_home"
+            android:title="@string/home_title" />
+        <item
+            android:id="@+id/navigation_item_blog"
+            android:icon="@mipmap/iconfont_blog"
+            android:title="@string/blog_title" />
+        <item
+            android:id="@+id/navigation_item_about"
+            android:icon="@mipmap/iconfont_about"
+            android:title="@string/about_title" />
+    </group>
+
+</menu>
