@@ -65,3 +65,4 @@
 - NavigationView + DrawerLayout
 思路：
 1. NavigationView：左边滑出的部分是那一部分的布局，分两部分，上面一部分叫做headerlayout，下面那些是menu
+2. BlogFraagment:setWebClient帮助WebView处理javaScript的对话框，网站图标，网站title，加载进度

@@ -60,6 +60,7 @@ public class HomeActivity extends BaseActivity {
         mFragmentManager.beginTransaction().add(R.id.fl_main_content, mCurrentFragment).commit();
     }
 
+    //TODO question 切换第一次的时候没有问题,但是第二次之后会出现多个item选中状态
     private void handleNavigationView() {
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
