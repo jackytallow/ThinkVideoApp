@@ -70,7 +70,7 @@ public class HomeActivity extends BaseActivity {
                 }
                 switch (item.getItemId()) {
                     case R.id.navigation_item_video:
-
+                        switchFragment(HomeFragment.class);
                         mToolbar.setTitle(R.string.home_title);
                         break;
                     case R.id.navigation_item_blog:
