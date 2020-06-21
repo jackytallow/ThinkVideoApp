@@ -66,3 +66,8 @@
 思路：
 1. NavigationView：左边滑出的部分是那一部分的布局，分两部分，上面一部分叫做headerlayout，下面那些是menu
 2. BlogFraagment:setWebClient帮助WebView处理javaScript的对话框，网站图标，网站title，加载进度
+
+## 首页实现
+1. 无限轮播边缘循环部分逻辑，自动轮播，使用handler，post5s，需要轮播的时候点击进行轮播
+2. 圆点对象持有viewpager，根据viewpager的count得到自身个数
+3. viewpager的adapter用一个包装类，可以设置是否边缘循环以及第一个和最后一个是否要缓存起来

@@ -14,4 +14,24 @@
 2、基于ijkplayer,解码支持RMVB,MKV,WMA，MP4...等主流音视频格式，达到万能播放的体验\n
 3、收藏影视剧、播放历史，一个不缺\n
    4、直播高清央视及卫视节目。\n</string>
+
+    <string name="a_name">三生三世十里桃花</string>
+    <string name="b_name">那片星空那片海</string>
+    <string name="c_name">大秦帝国之崛起</string>
+    <string name="d_name">射雕英雄传</string>
+    <string name="e_name">中国式相亲之奶茶大叔遭疯抢</string>
+
+    <string name="site_letv">乐视视频</string>
+    <string name="site_sohu">搜狐视频</string>
+
+    <string name="channel_series">电视剧</string>
+    <string name="channel_movie">电影</string>
+    <string name="channel_comic">动漫</string>
+    <string name="channel_documentary">纪录片</string>
+    <string name="channel_music">音乐</string>
+    <string name="channel_variety">综艺</string>
+    <string name="channel_live">直播</string>
+    <string name="channel_favorite">收藏</string>
+    <string name="channel_history">历史</string>
+
 </resources>
