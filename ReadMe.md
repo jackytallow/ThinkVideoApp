@@ -76,3 +76,9 @@
 1. Activity中嵌套Viewpager，ViewPager再组合Fragment
 2. Viewpager有自定义指示器
 3. Frragment页面有下拉刷新，下拉加载更多
+
+## 数据模型
+- 序列化的方法
+- 序列化原则
+  1. 使用内存的时候，Parcelable比Serializable性能高
+  2. Serializable在序列化的时候会产生大量的临时变量,从而引起频繁的GC

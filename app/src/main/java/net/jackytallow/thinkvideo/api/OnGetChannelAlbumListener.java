@@ -1,5 +1,8 @@
 package net.jackytallow.thinkvideo.api;
 
+import net.jackytallow.thinkvideo.model.AlbumList;
+import net.jackytallow.thinkvideo.model.ErrorInfo;
+
 /**
  * @author jacky
  * @version 1.0.0
@@ -7,7 +10,7 @@ package net.jackytallow.thinkvideo.api;
  */
 public interface OnGetChannelAlbumListener {
 
-    void OnGetChannelAlbumSuccess();
+    void OnGetChannelAlbumSuccess(AlbumList albumList);
 
-    void OnGetChannelAlbumFailed();
+    void OnGetChannelAlbumFailed(ErrorInfo info);
 }
