@@ -14,6 +14,7 @@ import com.hejunlin.superindicatorlibray.CircleIndicator;
 import com.hejunlin.superindicatorlibray.LoopViewPager;
 
 import net.jackytallow.thinkvideo.R;
+import net.jackytallow.thinkvideo.activities.DetailListActivity;
 import net.jackytallow.thinkvideo.adapter.HomePicAdapter;
 import net.jackytallow.thinkvideo.base.BaseFragment;
 import net.jackytallow.thinkvideo.model.Channel;
@@ -63,6 +64,7 @@ public class HomeFragment extends BaseFragment {
                         break;
                     default:
                         //TODO 跳转频道
+                        DetailListActivity.launchDetailList(getActivity(),position + 1);
                         break;
                 }
             }

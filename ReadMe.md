@@ -71,3 +71,8 @@
 1. 无限轮播边缘循环部分逻辑，自动轮播，使用handler，post5s，需要轮播的时候点击进行轮播
 2. 圆点对象持有viewpager，根据viewpager的count得到自身个数
 3. viewpager的adapter用一个包装类，可以设置是否边缘循环以及第一个和最后一个是否要缓存起来
+
+## 列表页思路
+1. Activity中嵌套Viewpager，ViewPager再组合Fragment
+2. Viewpager有自定义指示器
+3. Frragment页面有下拉刷新，下拉加载更多

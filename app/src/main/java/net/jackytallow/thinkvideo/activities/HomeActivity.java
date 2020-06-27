@@ -66,7 +66,7 @@ public class HomeActivity extends BaseActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 if (mPreItem != null) {
-                    mPreItem.setCheckable(false);
+                    mPreItem.setChecked(true);
                 }
                 switch (item.getItemId()) {
                     case R.id.navigation_item_video:
