@@ -3,6 +3,8 @@ package net.jackytallow.thinkvideo.base;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import com.google.gson.Gson;
 
@@ -41,5 +43,16 @@ public class AppManager extends Application {
 
     public static Resources getResource() {
         return mContext.getResources();
+    }
+
+
+    /**
+     * 当前网络是否可用
+     * @return
+     */
+    public static boolean isNetWorkAvaliable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
     }
 }

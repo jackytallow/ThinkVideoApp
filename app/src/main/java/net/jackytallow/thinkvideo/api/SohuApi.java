@@ -1,6 +1,20 @@
 package net.jackytallow.thinkvideo.api;
 
+import net.jackytallow.thinkvideo.base.AppManager;
+import net.jackytallow.thinkvideo.model.Album;
+import net.jackytallow.thinkvideo.model.AlbumList;
 import net.jackytallow.thinkvideo.model.Channel;
+import net.jackytallow.thinkvideo.model.ErrorInfo;
+import net.jackytallow.thinkvideo.model.Site;
+import net.jackytallow.thinkvideo.model.sohu.Result;
+import net.jackytallow.thinkvideo.model.sohu.ResultAlbum;
+import net.jackytallow.thinkvideo.utils.OkHttpUtils;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 /**
  * @author jacky
@@ -8,6 +22,8 @@ import net.jackytallow.thinkvideo.model.Channel;
  * @date 2020/6/27
  */
 public class SohuApi extends BaseSiteApi {
+
+    private static final String TAG = SohuApi.class.getSimpleName();
 
     private static final int SOHU_CHANNELID_MOVIE = 1; //搜狐电影频道ID
     private static final int SOHU_CHANNELID_SERIES = 2; //搜狐电视剧频道ID
@@ -28,8 +44,69 @@ public class SohuApi extends BaseSiteApi {
         doGetChannelAlbumsByUrl(url, listener);
     }
 
-    private void doGetChannelAlbumsByUrl(String url, OnGetChannelAlbumListener listener) {
+    private void doGetChannelAlbumsByUrl(final String url, final OnGetChannelAlbumListener listener) {
         //TODO 网络请求
+        OkHttpUtils.excute(url, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                if (listener != null) {
+                    ErrorInfo info = buildErrorInfo(url, "doGetChannelAlbumsByUrl", e, ErrorInfo.ERROR_TYPE_URL);
+                    listener.OnGetChannelAlbumFailed(info);
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    ErrorInfo info = buildErrorInfo(url, "doGetChannelAlbumsByUrl", null, ErrorInfo.ERROR_TYPE_FATAL);
+                    listener.OnGetChannelAlbumFailed(info);
+                    return;
+                }
+                //1. 取到数据映射ResulAlbum
+                //2.转换ResultAlbum变成Album
+                //3.Album存到AlbumList中
+                Result result = AppManager.getGson().fromJson(response.body().string(), Result.class);
+                AlbumList albumList = toConvertAlbumList(result);
+                if (albumList != null) {
+                    if (albumList.size() > 0 && listener != null) {
+                        listener.OnGetChannelAlbumSuccess(albumList);
+                    }
+                } else {
+                    ErrorInfo info = buildErrorInfo(url, "doGetChannelAlbumsByUrl", null, ErrorInfo.ERROR_TYPE_DATA_CONVERT);
+                    listener.OnGetChannelAlbumFailed(info);
+                }
+            }
+        });
+    }
+
+    private AlbumList toConvertAlbumList(Result result) {
+        if (result.getData().getResultAlbumList().size() > 0) {
+            AlbumList albumList = new AlbumList();
+
+            for (ResultAlbum resultAlbum : result.getData().getResultAlbumList()) {
+                Album album = new Album(Site.SOHU, AppManager.getContext());
+                album.setAlbumDesc(resultAlbum.getTvDesc());
+                album.setAlbumId(resultAlbum.getAlbumId());
+                album.setHorImgUrl(resultAlbum.getHorHighPic());
+                album.setMainActor(resultAlbum.getMainActor());
+                album.setTip(resultAlbum.getTip());
+                album.setTitle(resultAlbum.getVerHighPic());
+                album.setDirector(resultAlbum.getDirector());
+                albumList.add(album);
+            }
+            return albumList;
+        }
+        return null;
+    }
+
+    private ErrorInfo buildErrorInfo(String url, String functionName, Exception e, int type) {
+        ErrorInfo info = new ErrorInfo(Site.SOHU, type);
+        info.setExceptionString(e.getMessage());
+        info.setFunctionName(functionName);
+        info.setUrl(url);
+        info.setTag(TAG);
+        info.setClassName(TAG);
+        return info;
     }
 
     private String getChannelAlbumUrl(Channel channel, int pageNo, int pageSize) {

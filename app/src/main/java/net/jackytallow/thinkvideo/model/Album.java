@@ -40,9 +40,10 @@ public class Album implements Parcelable {
         }
     };
 
-    private Album(int siteId, Context context) {
+   public Album(int siteId, Context cxt) {
         site = new Site(siteId, context);
-    }
+        context =  cxt;
+   }
 
     public String getAlbumId() {
         return albumId;
