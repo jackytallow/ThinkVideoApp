@@ -92,7 +92,7 @@ public class DetailListFragment extends BaseFragment {
     }
 
     private void loadData() {
-        //TODO 加载更多数据
+        //加载更多数据
         pageNo ++;
         SiteApi.onGetChannelAlbums(getActivity(), pageNo, pageSize, 2, mChannelId, new OnGetChannelAlbumListener() {
             @Override
@@ -106,7 +106,8 @@ public class DetailListFragment extends BaseFragment {
             public void OnGetChannelAlbumFailed(ErrorInfo info) {
                 Log.d(TAG, "OnGetChannelAlbumFailed: failed");
                 //打印一下错误信息
-                Log.d(TAG, "OnGetChannelAlbumFailed: errorInfo"+info.getReason());
+                Log.d(TAG, "OnGetChannelAlbumFailed: errorInfo>>>"+info.getReason());
+                Log.d(TAG, "OnGetChannelAlbumFailed: errorInfo>>>"+info.getExceptionString());
             }
         });
     }

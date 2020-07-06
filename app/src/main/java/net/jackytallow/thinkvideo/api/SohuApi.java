@@ -50,6 +50,7 @@ public class SohuApi extends BaseSiteApi {
     // 播放url
     //http://api.tv.sohu.com/v4/video/info/3669315.json?site=1&plat=6&poid=1&api_key=9854b2afa779e1a6bff1962447a09dbd&sver=4.5.1&sysver=4.4.2&partner=47&aid=9112373
     private final static String API_VIDEO_PLAY_URL_FORMAT = "http://api.tv.sohu.com/v4/video/info/%s.json?site=1&plat=6&poid=1&api_key=9854b2afa779e1a6bff1962447a09dbd&sver=4.5.1&sysver=4.4.2&partner=47&aid=%s";
+
     //真实url格式 m3u8
     //http://hot.vrs.sohu.com/ipad3669271_4603585256668_6870592.m3u8?plat=6uid=f5dbc7b40dad477c8516885f6c681c01&pt=5&prod=app&pg=1
     @Override
@@ -63,7 +64,7 @@ public class SohuApi extends BaseSiteApi {
             @Override
             public void onFailure(Call call, IOException e) {
                 if (listener != null) {
-                    ErrorInfo info  = buildErrorInfo(url, "doGetChannelAlbumsByUrl", e, ErrorInfo.ERROR_TYPE_URL);
+                    ErrorInfo info = buildErrorInfo(url, "doGetChannelAlbumsByUrl", e, ErrorInfo.ERROR_TYPE_URL);
                     listener.OnGetChannelAlbumFailed(info);
                 }
             }
@@ -71,7 +72,7 @@ public class SohuApi extends BaseSiteApi {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (!response.isSuccessful()) {
-                    ErrorInfo info  = buildErrorInfo(url, "doGetChannelAlbumsByUrl", null, ErrorInfo.ERROR_TYPE_HTTP);
+                    ErrorInfo info = buildErrorInfo(url, "doGetChannelAlbumsByUrl", null, ErrorInfo.ERROR_TYPE_HTTP);
                     listener.OnGetChannelAlbumFailed(info);
                     return;
                 }
@@ -85,7 +86,7 @@ public class SohuApi extends BaseSiteApi {
                         listener.OnGetChannelAlbumSuccess(albumList);
                     }
                 } else {
-                    ErrorInfo info  = buildErrorInfo(url, "doGetChannelAlbumsByUrl", null, ErrorInfo.ERROR_TYPE_DATA_CONVERT);
+                    ErrorInfo info = buildErrorInfo(url, "doGetChannelAlbumsByUrl", null, ErrorInfo.ERROR_TYPE_DATA_CONVERT);
                     listener.OnGetChannelAlbumFailed(info);
                 }
 
@@ -97,7 +98,7 @@ public class SohuApi extends BaseSiteApi {
         if (result.getData().getResultAlbumList().size() > 0) { //说明有数据
             AlbumList albumList = new AlbumList();
             for (ResultAlbum resultAlbum : result.getData().getResultAlbumList()) {
-                Album album  = new Album(Site.SOHU);
+                Album album = new Album(Site.SOHU);
                 album.setAlbumDesc(resultAlbum.getTvDesc());
                 album.setAlbumId(resultAlbum.getAlbumId());
                 album.setHorImgUrl(resultAlbum.getHorHighPic());
@@ -111,11 +112,11 @@ public class SohuApi extends BaseSiteApi {
             return albumList;
         }
 
-        return  null;
+        return null;
     }
 
     private ErrorInfo buildErrorInfo(String url, String functionName, Exception e, int type) {
-        ErrorInfo info  = new ErrorInfo(Site.SOHU, type);
+        ErrorInfo info = new ErrorInfo(Site.SOHU, type);
         info.setExceptionString(e.getMessage());
         info.setFunctionName(functionName);
         info.setUrl(url);
@@ -126,7 +127,7 @@ public class SohuApi extends BaseSiteApi {
 
     private String getChannelAlbumUrl(Channel channel, int pageNo, int pageSize) {
         //格式化url
-        return String.format(API_CHANNEL_ALBUM_FORMAT, toConvertChannelId(channel),pageNo, pageSize);
+        return String.format(API_CHANNEL_ALBUM_FORMAT, toConvertChannelId(channel), pageNo, pageSize);
     }
 
     //自定义频道ID与真实频道id转换
@@ -157,7 +158,7 @@ public class SohuApi extends BaseSiteApi {
 
     private String getUUID() {
         UUID uuid = UUID.randomUUID();
-        return uuid.toString().replace("-","");
+        return uuid.toString().replace("-", "");
     }
 
 }

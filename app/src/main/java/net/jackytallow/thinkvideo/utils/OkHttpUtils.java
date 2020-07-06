@@ -27,10 +27,10 @@ public class OkHttpUtils {
 
     public static void excute(String url, Callback callback) {
         Request request = buildRequest(url);
-        excute(request,callback);
+        excuteall(request,callback);
     }
 
-    public static void excute(Request request, Callback callback) {
+    public static void excuteall(Request request, Callback callback) {
         AppManager.getHttpClient().newCall(request).enqueue(callback);
     }
 }
