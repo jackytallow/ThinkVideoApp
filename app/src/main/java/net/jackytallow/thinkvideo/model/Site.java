@@ -11,8 +11,8 @@ import net.jackytallow.thinkvideo.R;
  */
 public class Site {
 
-    public static final int LETV = 1;//乐视视频
-    public static final int SOHU = 2;//搜狐视频
+    public static final int SOHU = 1;//搜狐视频
+    public static final int LETV = 2;//乐视视频
     public static final int MAX_SITE = 2;
 
 
