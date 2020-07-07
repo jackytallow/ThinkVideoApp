@@ -1,5 +1,6 @@
 package net.jackytallow.thinkvideo.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,6 +8,8 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.jackytallow.thinkvideo.R;
@@ -76,7 +79,7 @@ public class DetailListFragment extends BaseFragment {
 
 
         pageNo = 0;
-        mAdapter = new DetailListAdapter(getActivity(), new Channel(mChannelId,getActivity()));
+        mAdapter = new DetailListAdapter(getActivity(), new Channel(mChannelId, getActivity()));
         loadData(); //第一次加载数据
         if (mSiteId == Site.LETV) { //乐视下2列
             mColunms = 2;
@@ -167,6 +170,8 @@ public class DetailListFragment extends BaseFragment {
 
         private Context mContext;
         private Channel mChannel;
+        private AlbumList mAlbumList = new AlbumList();
+        private int mColumns;
 
         public DetailListAdapter(Context context, Channel channel) {
             mContext = context;
@@ -176,25 +181,65 @@ public class DetailListFragment extends BaseFragment {
         @NonNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return null;
+            View view = ((Activity) mContext).getLayoutInflater().inflate(R.layout.detailist_item, null);
+            ItemViewHolder itemViewHolder = new ItemViewHolder(view);
+            view.setTag(itemViewHolder);
+            return itemViewHolder;
         }
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+             if (mAlbumList.size() == 0) {
+                 return;
+             }
+            Album album =  getItem(position);
+             if (holder instanceof ItemViewHolder){
+                 ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
+                 itemViewHolder.albumName.setText(album.getTitle());
+                 if (album.getTip().isEmpty()) {
+                     itemViewHolder.albumTip.setVisibility(View.GONE);
+                 } else {
+                     itemViewHolder.albumTip.setText(album.getTip());
+                 }
 
+
+             }
+        }
+
+        private Album getItem(int position) {
+            return mAlbumList.get(position);
         }
 
         @Override
         public int getItemCount() {
+            if (mAlbumList.size() > 0) {
+                return mAlbumList.size();
+            }
             return 0;
         }
 
         public void setColumns(int columns) {
-            //TODO
+           mColumns = columns;
         }
 
         public void setData(Album album) {
-            //TODO
+            mAlbumList.add(album);
+        }
+
+        public class ItemViewHolder extends RecyclerView.ViewHolder {
+
+            private LinearLayout resultContainer;
+            private ImageView albumPoster;
+            private TextView albumName;
+            private TextView albumTip;
+
+            public ItemViewHolder(View view) {
+                super(view);
+                resultContainer = view.findViewById(R.id.album_container);
+                albumPoster = view.findViewById(R.id.iv_album_poster);
+                albumName = view.findViewById(R.id.tv_album_name);
+                albumTip = view.findViewById(R.id.tv_album_tip);
+            }
         }
     }
 
