@@ -81,4 +81,4 @@
 - 序列化的方法
 - 序列化原则
   1. 使用内存的时候，Parcelable比Serializable性能高
-  2. Serializable在序列化的时候会产生大量的临时变量,从而引起频繁的GC
+  2. Serializable在序列化的时候会产生大量的临时变量,从而引起频繁的GC	

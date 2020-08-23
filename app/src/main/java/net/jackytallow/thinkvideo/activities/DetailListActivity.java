@@ -57,7 +57,7 @@ public class DetailListActivity extends BaseActivity {
         if (intent != null) {
             mChannId = intent.getIntExtra(CHANNEL_ID, 0);
         }
-        Channel channel = new Channel(mChannId,this);
+        Channel channel = new Channel(mChannId, this);
         String titleName = channel.getChannelName();
 
         setSupportActionBar();
@@ -110,10 +110,10 @@ public class DetailListActivity extends BaseActivity {
     }
 
 
-    public static void launchDetailList(Context context,int chanelId) {
-        Intent intent = new Intent(context,DetailListActivity.class);
+    public static void launchDetailList(Context context, int chanelId) {
+        Intent intent = new Intent(context, DetailListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        intent.putExtra(CHANNEL_ID,chanelId);
+        intent.putExtra(CHANNEL_ID, chanelId);
         context.startActivity(intent);
     }
 

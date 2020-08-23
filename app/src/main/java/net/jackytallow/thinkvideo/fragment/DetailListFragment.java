@@ -2,6 +2,7 @@ package net.jackytallow.thinkvideo.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import net.jackytallow.thinkvideo.R;
@@ -21,6 +23,7 @@ import net.jackytallow.thinkvideo.model.AlbumList;
 import net.jackytallow.thinkvideo.model.Channel;
 import net.jackytallow.thinkvideo.model.ErrorInfo;
 import net.jackytallow.thinkvideo.model.Site;
+import net.jackytallow.thinkvideo.utils.ImageUtils;
 import net.jackytallow.thinkvideo.widget.PullLoadRecycleView;
 
 import androidx.annotation.NonNull;
@@ -83,6 +86,9 @@ public class DetailListFragment extends BaseFragment {
         loadData(); //第一次加载数据
         if (mSiteId == Site.LETV) { //乐视下2列
             mColunms = 2;
+            mAdapter.setColumns(mColunms);
+        } else {
+            mColunms = 3;
             mAdapter.setColumns(mColunms);
         }
     }
@@ -189,21 +195,30 @@ public class DetailListFragment extends BaseFragment {
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-             if (mAlbumList.size() == 0) {
-                 return;
-             }
-            Album album =  getItem(position);
-             if (holder instanceof ItemViewHolder){
-                 ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
-                 itemViewHolder.albumName.setText(album.getTitle());
-                 if (album.getTip().isEmpty()) {
-                     itemViewHolder.albumTip.setVisibility(View.GONE);
-                 } else {
-                     itemViewHolder.albumTip.setText(album.getTip());
-                 }
+            if (mAlbumList.size() == 0) {
+                return;
+            }
+            Album album = getItem(position);
+            if (holder instanceof ItemViewHolder) {
+                ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
+                itemViewHolder.albumName.setText(album.getTitle());
+                if (album.getTip().isEmpty()) {
+                    itemViewHolder.albumTip.setVisibility(View.GONE);
+                } else {
+                    itemViewHolder.albumTip.setText(album.getTip());
+                }
+                Point point = ImageUtils.getVerPostSize(mContext, mColumns);
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(point.x,point.y);
+                itemViewHolder.albumPoster.setLayoutParams(params);
 
+                if (album.getVerImgUrl() != null) {
+                    ImageUtils.displayImage(itemViewHolder.albumPoster,album.getVerImgUrl(),point.x,point.y);
+                } else {
+                    //TODO 默认图
 
-             }
+                }
+
+            }
         }
 
         private Album getItem(int position) {
@@ -219,7 +234,7 @@ public class DetailListFragment extends BaseFragment {
         }
 
         public void setColumns(int columns) {
-           mColumns = columns;
+            mColumns = columns;
         }
 
         public void setData(Album album) {
