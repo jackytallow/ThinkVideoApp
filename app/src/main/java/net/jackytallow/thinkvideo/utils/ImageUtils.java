@@ -29,12 +29,14 @@ public class ImageUtils {
                 Glide.with(imageView.getContext())
                         .load(url)
                         .error(R.mipmap.ic_loading_hor)
+                        .fitCenter()
                         .override(height, width)
                         .into(imageView);
             } else {
                 Glide.with(imageView.getContext())
                         .load(url)
                         .error(R.mipmap.ic_loading_hor)
+                        .centerCrop()
                         .override(width, height)
                         .into(imageView);
             }

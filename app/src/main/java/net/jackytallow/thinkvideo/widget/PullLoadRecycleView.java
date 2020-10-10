@@ -136,12 +136,6 @@ public class PullLoadRecycleView extends LinearLayout {
                 }
             }
 
-            //触发上拉加载更多
-            if (mSwipeRefreshLayout.isEnabled()) {
-                mSwipeRefreshLayout.setEnabled(true);
-            } else {
-                mSwipeRefreshLayout.setEnabled(false);
-            }
             //1.没有加载更多，totalCount- 1 == lastItem
             //3.刷新layout可以用
             //4.不是处于下拉刷新状态
@@ -149,7 +143,11 @@ public class PullLoadRecycleView extends LinearLayout {
                     && mSwipeRefreshLayout.isEnabled()
                     && mIsRefresh
                     && (dx > 0 || dy > 0)) {
+                //加载更多的时候，禁止下拉刷新
+                mSwipeRefreshLayout.setEnabled(false);
                 loadMoreData();
+            } else {
+                mSwipeRefreshLayout.setEnabled(true);
             }
         }
     }
